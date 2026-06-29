@@ -1,0 +1,177 @@
+[
+  {
+    "suffix": "Ingestor",
+    "definition": "Pulls or receives raw data from an external source and brings it into the system.",
+    "tags": ["data", "incoming", "integration"],
+    "example": "S3TelemetryIngestor",
+    "antiPattern": "Don't use it if the data is already inside your domain. Use a 'Processor' instead."
+  },
+  {
+    "suffix": "Normalizer",
+    "definition": "Transforms messy, varied external data shapes into a single uniform internal format.",
+    "tags": ["data", "incoming", "transformation", "clean-up"],
+    "example": "WebhookPayloadNormalizer",
+    "antiPattern": "Don't use it for business logic. It should only handle structural formatting."
+  },
+  {
+    "suffix": "Engine",
+    "definition": "Executes complex, heavy algorithmic rules or state evaluations.",
+    "tags": ["logic", "internal", "complex"],
+    "example": "TaxCalculationEngine",
+    "antiPattern": "If a class just has a couple of 'if/else' statements, it's a 'Service', not an 'Engine'."
+  },
+  {
+    "suffix": "Resolver",
+    "definition": "Takes an ambiguous or dynamic input and determines exactly what asset, route, or strategy it maps to.",
+    "tags": ["network", "internal", "routing", "utility"],
+    "example": "GraphQLDependencyResolver",
+    "antiPattern": "Avoid using it if the mapping is a simple static 1:1 key-value lookup. Use a 'Mapper' or constant dictionary."
+  },
+  {
+    "suffix": "Handler",
+    "definition": "Asynchronously responds to a specific triggered network event or message queue item.",
+    "tags": ["network", "incoming", "event-driven"],
+    "example": "OrderPlacedEventHandler",
+    "antiPattern": "Don't pack business logic inside it. It should just catch the event and pass it to a Service."
+  },
+  {
+    "suffix": "Processor",
+    "definition": "Maintains a structured workflow pipeline to manipulate, enrich, or apply mutations to a data object.",
+    "tags": ["data", "internal", "transformation"],
+    "example": "ImageResizeProcessor",
+    "antiPattern": "Avoid if it doesn't modify or process the data payload directly. If it just coordinates steps, use 'Coordinator'."
+  },
+  {
+    "suffix": "Coordinator",
+    "definition": "Orchestrates complex business workflows involving multiple independent services or domains.",
+    "tags": ["logic", "internal", "orchestration"],
+    "example": "UserOnboardingCoordinator",
+    "antiPattern": "Don't use it if it executes raw database or low-level logic itself. It should only delegate tasks."
+  },
+  {
+    "suffix": "Extractor",
+    "definition": "Isolates and pulls out specific sub-sections or metadata from complex payloads or files.",
+    "tags": ["data", "incoming", "utility"],
+    "example": "JwtTokenClaimsExtractor",
+    "antiPattern": "Don't use if it transforms the shape entirely. Use a 'Mapper' or 'Converter' for total translations."
+  },
+  {
+    "suffix": "Dispatcher",
+    "definition": "Acts as a traffic cop, routing events, messages, or jobs to their correct internal handlers or queues.",
+    "tags": ["network", "outgoing", "routing"],
+    "example": "NotificationDispatcher",
+    "antiPattern": "Do not include the actual delivery logic here. It should only map and dispatch, not execute the delivery."
+  },
+  {
+    "suffix": "Client",
+    "definition": "An outbound network wrapper handling authentication and protocols to speak with a specific third-party API.",
+    "tags": ["network", "outgoing", "integration"],
+    "example": "StripeBillingClient",
+    "antiPattern": "Avoid baking domain business logic into it. It should only manage the transport layer and raw network responses."
+  },
+  {
+    "suffix": "Adapter",
+    "definition": "Translates an incompatible third-party or legacy interface so it complies with your internal contracts.",
+    "tags": ["logic", "integration", "structural"],
+    "example": "LegacyDatabaseAdapter",
+    "antiPattern": "Don't use it if you are writing original code from scratch. Adapters exist specifically to reconcile misaligned interfaces."
+  },
+  {
+    "suffix": "Validator",
+    "definition": "Evaluates a payload or state against specific business invariants, throwing errors or returning boolean outcomes.",
+    "tags": ["logic", "incoming", "security"],
+    "example": "PasswordStrengthValidator",
+    "antiPattern": "Do not mutate the object being validated inside this class. It should strictly perform read-only evaluations."
+  },
+  {
+    "suffix": "Mapper",
+    "definition": "A pure, stateless utility that copies data out of one object layer into an entirely separate data layer.",
+    "tags": ["data", "internal", "transformation"],
+    "example": "UserEntityToDtoMapper",
+    "antiPattern": "Never inject services or database dependencies here. Keep it 100% synchronous and deterministic."
+  },
+  {
+    "suffix": "Repository",
+    "definition": "Mediates between your core domain logic and data mapping layers, acting like an in-memory collection of domain objects.",
+    "tags": ["data", "internal", "storage"],
+    "example": "ProductRepository",
+    "antiPattern": "Don't place complex domain orchestrations here. Limit it entirely to fetching, saving, and querying records."
+  },
+  {
+    "suffix": "Factory",
+    "definition": "Encapsulates complex object creation logic, hiding constructor details and managing dependency injection for new instances.",
+    "tags": ["logic", "internal", "creational"],
+    "example": "HttpClientFactory",
+    "antiPattern": "Don't use it for simple `new Object()` instances that require no setup. Overusing it introduces unnecessary boilerplate."
+  },
+  {
+    "suffix": "Strategy",
+    "definition": "Defines an interchangeable algorithm or business rule path that can be swapped dynamically at runtime.",
+    "tags": ["logic", "internal", "complex"],
+    "example": "FedExShippingStrategy",
+    "antiPattern": "If your conditional branches are trivial or static, a simple configuration switch or if-statement is better."
+  },
+  {
+    "suffix": "Interceptor",
+    "definition": "Hooks into standard framework lifecycles to inspect, modify, or halt outgoing requests or incoming responses.",
+    "tags": ["network", "internal", "security"],
+    "example": "AuthTokenInterceptor",
+    "antiPattern": "Don't hide primary application state mutations here. Keep its scope tightly limited to cross-cutting concerns like logging or auth tokens."
+  },
+  {
+    "suffix": "Sanitizer",
+    "definition": "Cleans text strings or raw input payloads to protect against security vectors like XSS, injections, or bad encoding.",
+    "tags": ["data", "incoming", "security", "clean-up"],
+    "example": "HtmlInputSanitizer",
+    "antiPattern": "Don't evaluate business logic. It shouldn't care if an input is 'valid', only that it is physically 'safe'."
+  },
+  {
+    "suffix": "Aggregator",
+    "definition": "Queries multiple disparate backend microservices or tables to synthesize the findings into a singular unified view.",
+    "tags": ["data", "internal", "orchestration"],
+    "example": "FinancialReportAggregator",
+    "antiPattern": "Don't use it to execute write actions or business mutations. It should strictly act as a read-heavy compilation layer."
+  },
+  {
+    "suffix": "Exporter",
+    "definition": "Transforms internal domain datasets into a downloadable, standard file format for end-user ingestion.",
+    "tags": ["data", "outgoing", "utility"],
+    "example": "AuditLogCsvExporter",
+    "antiPattern": "Don't handle the user distribution or email attachment pipeline here. Just output the file blob or stream data."
+  },
+  {
+    "suffix": "Provider",
+    "definition": "Exposes internal runtime state, configurations, or localized services to deeply nested system dependencies.",
+    "tags": ["logic", "internal", "utility"],
+    "example": "SystemTimeProvider",
+    "antiPattern": "Don't use this if you are actively performing CRUD mutations. Providers give access; they don't modify workflows."
+  },
+  {
+    "suffix": "Watcher",
+    "definition": "Maintains persistent event listeners or long-poll connections to observe system, file, or database changes in real time.",
+    "tags": ["network", "incoming", "event-driven"],
+    "example": "FileConfigurationWatcher",
+    "antiPattern": "Do not let the watcher run the entire recovery operations. Trigger a decoupled 'Handler' or 'Service' to respond instead."
+  },
+  {
+    "suffix": "Presenter",
+    "definition": "Prepares and formats internal state values specifically for view rendering layers (e.g., turning pennies to clean dollar strings).",
+    "tags": ["data", "outgoing", "transformation"],
+    "example": "InvoiceViewModelPresenter",
+    "antiPattern": "Never permit DB queries or raw business calculations here. It assumes data is already correct and purely formats it for display."
+  },
+  {
+    "suffix": "Mutator",
+    "definition": "A utility designed to explicitly alter state values or complex configurations across complex nested trees.",
+    "tags": ["logic", "internal", "transformation"],
+    "example": "GraphNodeMutator",
+    "antiPattern": "Avoid if you are operating on plain database models. Standard repositories or model setters are preferred over separate helper mutators."
+  },
+  {
+    "suffix": "Evaluator",
+    "definition": "Processes specific conditions, logic expressions, or runtime formulas to produce a single calculated boolean or numeric grade.",
+    "tags": ["logic", "internal", "complex"],
+    "example": "PromoCodeEligibilityEvaluator",
+    "antiPattern": "Do not handle error redirection or persistence here. Keep it mathematical: pass variables in, yield a evaluation result out."
+  }
+]

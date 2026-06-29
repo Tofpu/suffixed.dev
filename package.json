@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview"
   },
+  "homepage": "https://tofpu.github.io/suffixed.dev",
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",
     "react": "^19.2.7",

@@ -4,17 +4,11 @@
 
 **suffixed.dev** is a cheat sheet for naming your code. Instead of calling every file a generic Manager or Service, use this community-driven guide to find precise, professional names based on exactly what your code does.
 
+The entire app runs entirely on the client side, powered by filtering a single, static registry file: `src/data/suffixes.json`.
+
 Built using **React, TypeScript, and Tailwind CSS**.
 
 > ⚠️**Transparency disclaimer**: Since I'm not well-versed in UI/UX, I utilized AI-assisted engineering for this project. The initial dataset and interface layouts were generated using **Google Gemini**, built under the strict supervision, manual refactoring, and code review of a human developer (me).
-
----
-
-## 🚀 How It Works
-
-The platform uses a tag-based lookup engine. Developers can click behavioral, directional, or structural tags to instantly filter down to the exact industry-standard suffix they need, complete with concrete code examples and anti-pattern warnings.
-
-The entire web app runs completely on the client side, powered by a single, typed registry file: `src/data/suffixes.json`.
 
 ---
 

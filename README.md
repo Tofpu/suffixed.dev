@@ -6,6 +6,8 @@
 
 Built using **React, TypeScript, and Tailwind CSS**.
 
+> ⚠️**Transparency disclaimer**: Since I'm not well-versed in UI/UX, I utilized AI-assisted engineering for this project. The initial dataset and interface layouts were generated using **Google Gemini**, built under the strict supervision, manual refactoring, and code review of a human developer (me).
+
 ---
 
 ## 🚀 How It Works

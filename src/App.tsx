@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import type {SuffixEntry} from './types';
 
-import SUFFIX_DATA from './suffixes.json';
+import SUFFIX_DATA from './data/suffixes.json';
 
 // Extract all unique tags for the sidebar selection
 const ALL_TAGS = Array.from(new Set((SUFFIX_DATA as SuffixEntry[]).flatMap(item => item.tags)));
